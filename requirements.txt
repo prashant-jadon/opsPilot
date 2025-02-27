@@ -1,0 +1,15 @@
+SpeechRecognition>=3.8.1
+google-generativeai>=0.3.0
+pymongo>=4.6.0
+python-dotenv>=0.19.0
+streamlit>=1.32.0
+pandas>=2.0.0
+plotly>=5.18.0
+# For macOS, install portaudio first using homebrew:
+# brew install portaudio
+# Then install pyaudio using pip:
+# pip install pyaudio 
+bcrypt>=4.0.1
+streamlit-calendar>=1.1.0
+PyJWT>=2.8.0
+extra-streamlit-components>=0.1.6 
