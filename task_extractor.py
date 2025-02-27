@@ -123,6 +123,7 @@ class TaskExtractor:
         - Create a separate task object for EACH distinct task mentioned
         - If multiple tasks are assigned to the same person, create separate entries
         - If a task is assigned to multiple people, create separate entries for each person
+        - If a task is assigned based on a name, assign it to that person. If the name and role do not match (e.g., if 'Prince' is in development but a marketing task is assigned), show a warning and assign it to a user with the matching role.
         - For tasks without explicit deadlines, use "Not specified"
         
         Format the response as valid JSON only, with no additional text.
@@ -170,7 +171,23 @@ class TaskExtractor:
                     task['role'] = self.normalize_role(task['role'])
                 if 'deadline' in task:
                     task['deadline'] = self.convert_to_date(task['deadline'])
-                    
+                
+                # Check if assignee and role match
+                if 'assignee' in task and 'role' in task:
+                    assigned_role = task['role']
+                    assignee_name = task['assignee']
+                    # Find the user by name to get their actual role
+                    user = self.find_user_by_name(assignee_name)  # Implement this method to find user by name
+                    if user and user['role'] != assigned_role:
+                        print(f"Warning: Task '{task['task']}' assigned to '{assignee_name}' with role '{assigned_role}' does not match their actual role. Assigning to a user with the matching role instead.")
+                        # Assign to a user with the matching role
+                        matching_user = self.find_user_by_role(assigned_role)  # Implement this method to find user by role
+                        if matching_user:
+                            task['assignee'] = matching_user['name']
+                            task['assignee_id'] = str(matching_user['_id'])
+                        else:
+                            print(f"Warning: No user found with role '{assigned_role}' to assign the task.")
+
             # Filter out tasks with invalid roles
             valid_tasks = [task for task in tasks if task.get('role') in self.role_mappings.values()]
             
@@ -194,3 +211,15 @@ class TaskExtractor:
         except Exception as e:
             print(f"Error extracting tasks: {str(e)}")
             return [] 
+
+    def find_user_by_name(self, name):
+        """Find a user by their name in the database."""
+        # Implement logic to query the database for a user by name
+        # Return user object or None if not found
+        pass
+
+    def find_user_by_role(self, role):
+        """Find a user by their role in the database."""
+        # Implement logic to query the database for a user by role
+        # Return user object or None if not found
+        pass 
