@@ -123,7 +123,7 @@ class TaskExtractor:
         - Create a separate task object for EACH distinct task mentioned
         - If multiple tasks are assigned to the same person, create separate entries
         - If a task is assigned to multiple people, create separate entries for each person
-        - If a task is assigned based on a name, assign it to that person. If the name and role do not match (e.g., if 'Prince' is in development but a marketing task is assigned), show a warning and assign it to a user with the matching role.
+        - If a task is assigned based on a name, assign it to that person. If the name and role do not match (e.g., if 'Prince' is in development but a marketing task is assigned), show a warning and assign it to a user with the matching role. The task will be assigned to the employee with the role of [role].
         - For tasks without explicit deadlines, use "Not specified"
         
         Format the response as valid JSON only, with no additional text.
@@ -179,7 +179,7 @@ class TaskExtractor:
                     # Find the user by name to get their actual role
                     user = self.find_user_by_name(assignee_name)  # Implement this method to find user by name
                     if user and user['role'] != assigned_role:
-                        print(f"Warning: Task '{task['task']}' assigned to '{assignee_name}' with role '{assigned_role}' does not match their actual role. Assigning to a user with the matching role instead.")
+                        print(f"Warning: Task '{task['task']}' assigned to '{assignee_name}' with role '{assigned_role}' does not match their actual role. The task will be assigned to the employee with the role of '{user['role']}'.")
                         # Assign to a user with the matching role
                         matching_user = self.find_user_by_role(assigned_role)  # Implement this method to find user by role
                         if matching_user:

@@ -1,14 +1,13 @@
-import toml
 from pymongo import MongoClient
 from datetime import datetime
+import os
+from dotenv import load_dotenv
 from auth import hash_password
 
-# Load configuration from config.toml
-config = toml.load('config.toml')
+load_dotenv()
 
 def init_database():
-    # Use the URI from the config file
-    client = MongoClient(config['MONGODB']['URI'])
+    client = MongoClient(os.getenv('MONGODB_URI'))
     db = client.task_manager
     
     # Create indexes
