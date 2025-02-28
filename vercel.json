@@ -15,10 +15,5 @@
     "env": {
       "MONGODB_URI": "@mongodb-uri",
       "GEMINI_API_KEY": "@gemini-api-key"
-    },
-    "functions": {
-      "app.py": {
-        "maxDuration": 10
-      }
     }
   }
