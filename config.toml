@@ -1,0 +1,8 @@
+[GEMINI]
+API_KEY = "AIzaSyDzXoRPwtC6lRYHuwKGu833bj4aYLyXbGM"
+
+[MONGODB]
+URI = "mongodb+srv://prashant:prashant@cluster0.xz0da.mongodb.net/task_manager?retryWrites=true&w=majority&appName=Cluster0"
+
+[JWT]
+SECRET_KEY = "your-secure-random-key-here"
