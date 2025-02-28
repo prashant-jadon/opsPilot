@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: streamlit-app
+    env: python
+    plan: free  # Change to "starter" or "pro" if needed
+    region: oregon  # Choose nearest region
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "streamlit run app.py --server.port=$PORT --server.address=0.0.0.0"
+    envVars:
+      - key: GEMINI_API_KEY
+        value: "AIzaSyDzXoRPwtC6lRYHuwKGu833bj4aYLyXbGM"
+      - key: MONGODB_URI
+        value: "mongodb+srv://prince23:PPlj3kfTDA7lLGql@cluster0.brkawyb.mongodb.net/"
+      - key: JWT_SECRET_KEY
+        value: "your-secure-random-key-here"
